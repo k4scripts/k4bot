@@ -4,9 +4,10 @@ from pytz import timezone
 from tinydb import TinyDB, Query
 
 db = TinyDB('db.json')
-table = db.table('discord')
+discord_table = db.table('discord')
 
 TIMEZONE = timezone(os.getenv('TIMEZONE', 'Europe/Amsterdam'))
+
 
 def utc_to_timezone(timestamp: str, timezone: str = TIMEZONE) -> str:
     """ Converts a timestamp from UTC to the timezone. """
@@ -18,12 +19,17 @@ def timestamp_to_unix(timestamp: str) -> int:
     return int(datetime.strptime(timestamp, '%d/%m/%Y %H:%M:%S').timestamp())
 
 
+def check_roblox_in_db(roblox_id: int) -> bool:
+    """ Returns True if the Roblox ID is in the database, False otherwise. """
+    return bool(discord_table.search(Query().roblox_profile['id'] == roblox_id))
+
+
 def add_member_to_db(discord_id: int, profile_data: dict) -> (int | list[int]):
     """ Adds a member to the database. If the member already exists, it will update their profile data."""
-    del profile_data['description']
-    del profile_data['externalAppDisplayName']
-    del profile_data['hasVerifiedBadge']
-    del profile_data['isBanned']
+    keys_to_remove = ['description', 'externalAppDisplayName',
+                      'hasVerifiedBadge', 'isBanned']
+    for key in keys_to_remove:
+        del profile_data[key]
 
     if profile_data['displayName'] == profile_data['name']:
         del profile_data['displayName']
@@ -41,15 +47,15 @@ def add_member_to_db(discord_id: int, profile_data: dict) -> (int | list[int]):
     data = {'discord_id': discord_id,
             'roblox_profile': profile_data, 'verified_at': verified_at}
 
-    if table.search(Query().discord_id == discord_id):
-        return table.update(data, Query().discord_id == discord_id)
+    if discord_table.search(Query().discord_id == discord_id):
+        return discord_table.update(data, Query().discord_id == discord_id)
 
-    return table.insert(data)
+    return discord_table.insert(data)
 
 
 def get_member_from_db(discord_id: int) -> dict:
     """ Returns the member's data from the database. """
-    result = table.search(Query().discord_id == discord_id)
+    result = discord_table.search(Query().discord_id == discord_id)
     if not result:
         return {}
-    return table.search(Query().discord_id == discord_id)[0]
+    return discord_table.search(Query().discord_id == discord_id)[0]
