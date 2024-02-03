@@ -1,13 +1,13 @@
-import discord
 import string
 import random
 import re
 import os
+import discord
 from utils.embeds import ErrorEmbed, SuccessEmbed, WarningEmbed
-from utils.database import add_member_to_db
+from utils.database import add_member_to_db, check_roblox_in_db
+from utils.roblox_api import get_profile
 from discord import Option, ApplicationContext
 from discord.ext import commands
-from utils.roblox_api import get_profile
 from discord.ui import View, Button
 
 
@@ -39,6 +39,10 @@ class Verify(commands.Cog):
         profile_data = get_profile(user_id)
         if not profile_data:
             await ctx.respond(embed=ErrorEmbed(f'User {user_id} does not exist.'), ephemeral=True)
+            return
+
+        if check_roblox_in_db(user_id):
+            await ctx.respond(embed=ErrorEmbed('This Roblox account is already verified.'), ephemeral=True)
             return
 
         view = View()
@@ -84,8 +88,8 @@ class Verify(commands.Cog):
                     await ctx.author.edit(nick=name)
                 except discord.Forbidden:
                     pass
-                    #await ctx.respond(embed=ErrorEmbed('The bot does not have permission to edit your nickname.'), ephemeral=True)
-                
+                    # await ctx.respond(embed=ErrorEmbed('The bot does not have permission to edit your nickname.'), ephemeral=True)
+
                 add_member_to_db(ctx.author.id, profile_data)
 
             else:
