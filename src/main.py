@@ -1,5 +1,6 @@
 import os
 import discord
+from modules.logger import logger
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,7 +10,7 @@ bot = discord.Bot(
 
 @bot.event
 async def on_ready():
-    print(f"{bot.user} is ready and online!")
+    logger.info(f"{bot.user} is ready and online!")
 
 
 def load_extension(exceptions: list = []):
@@ -23,10 +24,10 @@ def load_extension(exceptions: list = []):
 
         try:
             bot.load_extension(f'extensions.{cog_name}')
-            print(f'Module loaded: {cog_name}')
+            logger.info(f'Module loaded: {cog_name}')
 
         except Exception as e:
-            print(f'{type(e).__name__}: {e}')
+            logger.warning(f'{type(e).__name__}: {e}')
 
 
 if __name__ == '__main__':

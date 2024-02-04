@@ -3,7 +3,7 @@ The bot used for administration and moderation in K4scripts Discord.
 
 ## 📋 TODO
 - [x] Make the 'db' persistent, bind volumes ~~or use a database~~
-- [ ] Add a logging system
+- [x] Add a logging system
 
 ## ❓ Technical Information
 This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycord.dev/).
@@ -16,6 +16,17 @@ This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycor
 | VERIFY_ROLE_ID | The ID of the role that is given to verified users | |
 | TIMEZONE | The timezone used for datetime conversions | Europe/Amsterdam |
 | GUILD_ID | The ID of the guild to use (for debugging) | |
+| LOGGING_LEVEL | The level of logging to use | 2 |
+
+#### 🪵 Logging Levels
+
+| Level | Description |
+| --- | --- |
+| 1 | DEBUG |
+| 2 | INFO |
+| 3 | WARNING |
+| 4 | ERROR |
+| 5 | CRITICAL |
 
 ## 🤖 Running the bot
 Set the environment variables in a `.env` file in the root of the project.
