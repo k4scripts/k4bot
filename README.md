@@ -11,17 +11,17 @@ This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycor
 ### 🍃 Environment Variables
 
 | Variable | Description | Default |
-| --- | --- | --- |
-| TOKEN | The bot token used to authenticate with Discord | |
-| VERIFY_ROLE_ID | The ID of the role that is given to verified users | |
-| TIMEZONE | The timezone used for datetime conversions | Europe/Amsterdam |
-| GUILD_ID | The ID of the guild to use (for debugging) | |
-| LOGGING_LEVEL | The level of logging to use | 2 |
+| :---: | --- | --- |
+| `TOKEN` | The bot token used to authenticate with Discord | |
+| `VERIFY_ROLE_ID` | The ID of the role that is given to verified users | |
+| `TIMEZONE` | The timezone used for datetime conversions | `Europe/Amsterdam` |
+| `GUILD_ID` | The ID of the guild to use (for debugging) | |
+| `LOGGING_LEVEL` | The level of logging to use | `2` |
 
 #### 🪵 Logging Levels
 
 | Level | Description |
-| --- | --- |
+| :---: | --- |
 | 1 | DEBUG |
 | 2 | INFO |
 | 3 | WARNING |
