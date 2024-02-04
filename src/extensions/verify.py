@@ -66,7 +66,7 @@ class Verify(commands.Cog):
             regen_button.disabled = True
 
             profile_data = get_profile(user_id)
-            if not get_profile(user_id):
+            if not profile_data:
                 await interaction.response.edit_message(embed=ErrorEmbed(f'User {user_id} does not exist.'), view=view)
                 return
 
