@@ -1,14 +1,14 @@
 # k4bot
-The bot used for administration and moderation in K4scripts Discord
+The bot used for administration and moderation in K4scripts Discord.
 
-## TODO
-- [ ] Make the 'db' persistent, bind volumes or use a database
+## 📋 TODO
+- [x] Make the 'db' persistent, bind volumes ~~or use a database~~
 - [ ] Add a logging system
 
-## Technical Information
+## ❓ Technical Information
 This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycord.dev/).
 
-### Environment Variables
+### 🍃 Environment Variables
 
 | Variable | Description | Default |
 | --- | --- | --- |
@@ -17,10 +17,10 @@ This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycor
 | TIMEZONE | The timezone used for datetime conversions | Europe/Amsterdam |
 | GUILD_ID | The ID of the guild to use (for debugging) | |
 
-## Running the bot
-Set the environment variables in a `.env` file
+## 🤖 Running the bot
+Set the environment variables in a `.env` file in the root of the project.
 
-### Locally
+### 🧰 Locally (for development)
 1. Create a virtual environment
 ```bash
 python3.11 -m venv .venv
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 python3.11 src/main.py
 ```
 
-### Docker
+### 🐋 Docker
 1. Build the Docker image
 ```bash
 docker build -t k4bot .
@@ -49,5 +49,6 @@ docker build -t k4bot .
 
 2. Run the Docker container
 ```bash
-docker run --env-file .env k4bot
+docker run --env-file .env --mount type=bind,source="$(pwd)"/db.json,target=/app/db.json k4bot
 ```
+We bind the `db.json` file to the container to make the database persistent.<br>Docs: [Docker - Use bind mounts](https://docs.docker.com/storage/bind-mounts/)
