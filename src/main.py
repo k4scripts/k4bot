@@ -3,11 +3,14 @@ import discord
 from dotenv import load_dotenv
 
 load_dotenv()
-bot = discord.Bot(debug_guilds=[int(os.getenv('GUILD_ID'))], intents=discord.Intents.all())
+bot = discord.Bot(
+    debug_guilds=[int(os.getenv('GUILD_ID'))], intents=discord.Intents.all())
+
 
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
+
 
 def load_extension(exceptions: list = []):
     ''' Loads all extensions from the extensions/ folder. '''
@@ -24,6 +27,7 @@ def load_extension(exceptions: list = []):
 
         except Exception as e:
             print(f'{type(e).__name__}: {e}')
+
 
 if __name__ == '__main__':
     load_extension()
