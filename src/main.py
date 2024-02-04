@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-bot = discord.Bot(debug_guilds=[int(os.getenv('DEBUG_GUILD'))], intents=discord.Intents.all())
+bot = discord.Bot(debug_guilds=[int(os.getenv('GUILD_ID'))], intents=discord.Intents.all())
 
 @bot.event
 async def on_ready():

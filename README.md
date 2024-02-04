@@ -15,7 +15,7 @@ This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycor
 | TOKEN | The bot token used to authenticate with Discord | |
 | VERIFY_ROLE_ID | The ID of the role that is given to verified users | |
 | TIMEZONE | The timezone used for datetime conversions | Europe/Amsterdam |
-| DEBUG_GUILD | The ID of the guild to use for debugging | |
+| GUILD_ID | The ID of the guild to use (for debugging) | |
 
 ## Running the bot
 Set the environment variables in a `.env` file
