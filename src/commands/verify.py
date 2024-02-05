@@ -3,7 +3,7 @@ import random
 import re
 import os
 import discord
-from utils.embeds import ErrorEmbed, SuccessEmbed, WarningEmbed
+from utils.embeds import ErrorEmbed, SuccessEmbed
 from utils.database import add_member_to_db, check_roblox_in_db
 from utils.roblox_api import get_profile
 from discord import Option, ApplicationContext
@@ -74,13 +74,13 @@ class Verify(commands.Cog):
             random_string = re.search(
                 r'`([a-zA-Z]+)`', interaction.message.embeds[0].description).group(1)
 
-            if random_string in profile_description:
+            if profile_description == random_string:
                 view.clear_items()
                 await interaction.response.edit_message(embed=SuccessEmbed('You have been verified!'), view=view)
                 try:
                     await ctx.author.add_roles(verified_role)
                 except discord.Forbidden:
-                    await ctx.respond(embed=ErrorEmbed('The bot does not have permission to add roles.'), ephemeral=True)
+                    await ctx.respond(embed=ErrorEmbed('The bot does not have permission to add roles.'))
 
                 name = profile_data.get('name', 'Unknown')
 
@@ -93,10 +93,9 @@ class Verify(commands.Cog):
                 add_member_to_db(ctx.author.id, profile_data)
 
             else:
-                verify_button.disabled = False
-                regen_button.disabled = False
-
-                await interaction.response.edit_message(embed=WarningEmbed(f'Please set your profile description to `{random_string}` and click the verify button.'), view=view)
+                view.clear_items()
+                await interaction.response.edit_message(embed=ErrorEmbed('Your profile description and the code do not match. Rerun the command'), view=view)
+                return
 
         verify_button.callback = verify_callback
 
