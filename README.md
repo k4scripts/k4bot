@@ -1,10 +1,6 @@
 # k4bot
 The bot used for administration and moderation in K4scripts Discord.
 
-## 📋 TODO
-- [x] Make the 'db' persistent, bind volumes ~~or use a database~~
-- [x] Add a logging system
-
 ## ❓ Technical Information
 This bot is written in Python 3.11.0 and uses the [Pycord library](https://pycord.dev/).
 
