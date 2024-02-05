@@ -42,7 +42,7 @@ class Database(commands.Cog):
         view.add_item(cancel_button)
         view.add_item(continue_button)
 
-        await ctx.respond(embed=ValidationEmbed(f'Are you sure you want to erase the database?', ':warning: You\'re about to __ERASE__ the database :warning:'), view=view)
+        await ctx.respond(embed=ValidationEmbed(f'Are you sure you want to erase the database?', ':warning: You\'re about to __ERASE__ the database :warning:'), view=view, ephemeral=True)
 
     @database.command(description='Remove user from the database.')
     async def remove(self, ctx: ApplicationContext, member: Option(discord.Member, description='The member to remove from the database.', required=True)):
