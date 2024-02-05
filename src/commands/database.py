@@ -1,3 +1,4 @@
+import os
 import discord
 from discord import Option, ApplicationContext
 from discord.ext import commands
@@ -16,8 +17,9 @@ class Database(commands.Cog):
 
     @database.command(description='Clear the database.')
     async def clear(self, ctx: ApplicationContext):
-
-        if not ctx.author.guild_permissions.administrator:
+        
+        owner_id = int(os.getenv('OWNER_ID', 0))
+        if ctx.author.id != owner_id:
             return await ctx.respond(embed=ErrorEmbed('You do not have permission to use this command.'), ephemeral=True)
 
         view = View()
