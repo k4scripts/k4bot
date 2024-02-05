@@ -1,4 +1,5 @@
 import os
+from modules.logger import logger
 from datetime import datetime
 from pytz import timezone
 from tinydb import TinyDB, Query
@@ -59,3 +60,26 @@ def get_member_from_db(discord_id: int) -> dict:
     if not result:
         return {}
     return discord_table.search(Query().discord_id == discord_id)[0]
+
+
+def remove_member_from_db(discord_id: int) -> int:
+    """ Removes a member from the database. """
+    return discord_table.remove(Query().discord_id == discord_id)
+
+
+def clear_db(discord_id:int = 0) -> None:
+    """ Clears the database. """
+    
+    if discord_id:
+        logger.critical(f'Requested to clear the database by #{discord_id}.')
+        
+    if not discord_table.all():
+        return
+    
+    with open('db.json.old', 'w') as backup_file:
+        with open('db.json', 'r') as db_file:
+            backup_file.write(db_file.read())
+    
+    logger.critical('Database has been cleared.')
+    
+    discord_table.truncate()

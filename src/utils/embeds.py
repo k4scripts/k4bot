@@ -64,3 +64,14 @@ class WhoIsEmbed(discord.Embed):
             value=f'<t:{data["verified_at"]}>',
             inline=True
         )
+
+
+class ValidationEmbed(discord.Embed):
+    ''' An embed to promt the user to make sure.'''
+
+    def __init__(self, description: str, title:str = 'Are you sure?'):
+        super().__init__(
+            title=title,
+            description=description,
+            color=discord.Color.orange()
+        )
