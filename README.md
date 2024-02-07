@@ -55,7 +55,12 @@ python3.11 src/main.py
 docker build -t k4bot .
 ```
 
-2. Run the Docker container
+2. Create the `db.json` file
+```bash
+touch db.json
+```
+
+3. Run the Docker container
 ```bash
 docker run -d --env-file .env --name k4bot --mount type=bind,source="$(pwd)"/db.json,target=/app/db.json k4bot
 ```
