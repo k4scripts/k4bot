@@ -13,7 +13,7 @@ async def on_ready():
     logger.info(f"{bot.user} is ready and online!")
 
 
-def load_commands(exceptions: list = []):
+def load_commands(exceptions: list[str] = []):
     ''' Loads all commands from the commands/ folder. '''
     CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 

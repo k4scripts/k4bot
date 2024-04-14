@@ -1,5 +1,4 @@
 import discord
-from discord import ApplicationContext
 from discord.ext import commands
 
 
@@ -11,7 +10,7 @@ class BotInfo(commands.Cog):
         "bot", "Bot related commands.")
 
     @bot.command(description='Gives info about the bot.')
-    async def info(self, ctx: ApplicationContext):
+    async def info(self, ctx: discord.ApplicationContext):
 
         embed = discord.Embed(
             description='''**k4bot** is made by the **k4scripts** development team.
