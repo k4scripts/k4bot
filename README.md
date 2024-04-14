@@ -55,13 +55,7 @@ python3.11 src/main.py
 docker build -t k4bot .
 ```
 
-2. Create the `db.json` file
+2. Run the Docker container
 ```bash
-touch db.json
+docker run -d --env-file .env --name k4bot k4bot
 ```
-
-3. Run the Docker container
-```bash
-docker run -d --env-file .env --name k4bot --mount type=bind,source="$(pwd)"/db.json,target=/app/db.json k4bot
-```
-We bind the `db.json` file to the container to make the database persistent.<br>Docs: [Docker - Use bind mounts](https://docs.docker.com/storage/bind-mounts/)
