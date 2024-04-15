@@ -30,3 +30,12 @@ class SuccessEmbed(discord.Embed):
             color=discord.Color.green()
         )
 
+class DMEmbed(discord.Embed):
+    ''' An embed for DMs.'''
+
+    def __init__(self, description: str, user: discord.Member):
+        super().__init__(
+            description=description,
+            color=discord.Color.green()
+        )
+        super().set_author(name=user.name, icon_url=user.avatar.url)
